@@ -32,8 +32,10 @@ function date_popup_load() {
   if (module_exists('jquery_ui')) {
     jquery_ui_add('ui.datepicker');
   }
+   
   if (variable_get('date_popup_timepicker', 'default') == 'default') {
-    drupal_add_js($path .'/lib/jquery.timeentry.pack.js');
+    //drupal_add_js($path .'/lib/jquery.timeentry.pack.js');
+    drupal_add_js($path .'/lib/jquery.timePicker.js');
   }
   $loaded = TRUE;
 }
@@ -85,7 +87,8 @@ function date_popup_init() {
   drupal_add_css(variable_get('date_popup_css_file', date_popup_css_default()));
   
   if (variable_get('date_popup_timepicker', 'default') == 'default') {
-    drupal_add_css(drupal_get_path('module', 'date_popup')  .'/themes/jquery.timeentry.css');
+    //drupal_add_css(drupal_get_path('module', 'date_popup')  .'/themes/jquery.timeentry.css');
+    drupal_add_css(drupal_get_path('module', 'date_popup')  .'/themes/timePicker.css');
   }
 }
 

@@ -153,7 +153,21 @@ class date_api_argument_handler extends views_handler_argument_date {
    */
   function get_default_argument($raw = FALSE) {
     if (!$raw && $this->options['default_argument_type'] == 'date') {
-      return date($this->format(), time());
+      //return date($this->format(), time());
+      $format = $this->format();
+      $arg = date($this->format(), time());
+
+       $parts = $this->date_handler->arg_parts($arg);
+ 
+       if($parts[0]['date']['week']){
+         $year = date("Y");
+         $last_week_of_year = date("W",strtotime(($year-1)."-"."12-31"));
+         $last_day_of_year  = date("w",strtotime(($year-1)."-"."12-31"));
+         if ($last_day_of_year > 3 and $week != $last_week_of_year) {
+           $arg = date($this->format(),time()+7*24*60*60);
+         }
+       }
+       return $arg;       
     }
     else {
       return parent::get_default_argument($raw);
