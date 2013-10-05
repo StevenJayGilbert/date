@@ -159,7 +159,7 @@ function date_repeat_days_ordered($week_start_day) {
  *
  * Constructs a human-readable description of the rule.
  */
-function date_repeat_rrule_description($rrule, $format = 'D M d Y') {
+function date_repeat_rrule_description($rrule, $format = 'D M d Y', $custom_return = 'Repeats !interval !bymonth !byday !count !until !except. !additional') {
   // Empty or invalid value.
   if (empty($rrule) || !strstr($rrule, 'RRULE')) {
     return;
@@ -186,13 +186,13 @@ function date_repeat_rrule_description($rrule, $format = 'D M d Y') {
   $interval = INTERVAL_options();
   switch ($rrule['FREQ']) {
     case 'WEEKLY':
-      $description['!interval'] = format_plural($rrule['INTERVAL'], 'every week', 'every @count weeks') .' ';
+      $description['!interval'] = format_plural($rrule['INTERVAL'], 'weekly', 'every @count weeks') .' ';
       break;
     case 'MONTHLY':
-      $description['!interval'] = format_plural($rrule['INTERVAL'], 'every month', 'every @count months') .' ';
+      $description['!interval'] = format_plural($rrule['INTERVAL'], 'monthly', 'every @count months') .' ';
       break;
     case 'YEARLY':
-      $description['!interval'] = format_plural($rrule['INTERVAL'], 'every year', 'every @count years') .' ';
+      $description['!interval'] = format_plural($rrule['INTERVAL'], 'yearly', 'every @count years') .' ';
       break;
     default:
       //$description['!interval'] = format_plural($rrule['INTERVAL'], 'every day', 'every @count days') .' ';
@@ -259,7 +259,8 @@ function date_repeat_rrule_description($rrule, $format = 'D M d Y') {
     $day_names = date_repeat_dow_day_options();
     $description['!week_starts_on'] = trim(t('!repeats_every_interval where the week start on !day_of_week', array('!repeats_every_interval ' => '', '!day_of_week' => $day_names[trim($rrule['WKST'])])));
   }
-  return t('Repeats !interval !bymonth !byday !count !until !except. !additional', $description);
+
+  return t($custom_return, $description);
 }
 
 /**
