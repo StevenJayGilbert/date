@@ -195,7 +195,7 @@ function date_repeat_rrule_description($rrule, $format = 'D M d Y') {
       $description['!interval'] = format_plural($rrule['INTERVAL'], 'every year', 'every @count years') .' ';
       break;
     default:
-      $description['!interval'] = format_plural($rrule['INTERVAL'], 'every day', 'every @count days') .' ';
+      //$description['!interval'] = format_plural($rrule['INTERVAL'], 'every day', 'every @count days') .' ';
       break;
   }
 
