@@ -105,7 +105,7 @@ function date_popup_init() {
   // Force loading base jquery-ui.css when using date_popup default theme,
   // otherwise the popup calendar will be displayed with no theme at all.
   if ($date_popup_css_file == date_popup_css_default()) {
-    drupal_add_css(jquery_ui_get_path() .'/themes/base/jquery-ui.css');
+    //drupal_add_css(jquery_ui_get_path() .'/themes/base/jquery-ui.css');
   }
   // Otherwise, load the CSS file in the corresponding theme directory.
   else {
